@@ -1,0 +1,17 @@
+{
+  "name": "surveyServer",
+  "version": "1.0.0",
+  "description": "description",
+  "author": "oz keisar",
+  "main": "index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "dependencies": {
+    "npm": "^6.1.0"
+  },
+  "scripts": {},
+  "keywords": []
+}
