@@ -1,0 +1,16 @@
+{
+  "_url": "mongodb://localhost:27017/",
+  "_db": "survey",
+  "_collections": {
+    "clients": "clients",
+    "partys": "partys",
+    "general": "general",
+    "newPartys": "newPartys"
+  },
+  "_collectionList": [
+    "clients",
+    "partys",
+    "general",
+    "newPartys"
+  ]
+}

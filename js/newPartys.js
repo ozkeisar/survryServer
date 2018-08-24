@@ -1,12 +1,13 @@
 const createNew = require('./createNewObject');
+const db = require('./mongodb/mongodb');
 const fs = require('fs');
 
 class newPartys {
 
     constructor(){
-        this.newPartyListFilePath = './data/JSONs/partys/newPartys.json';
-        this.newPartyList = require('./.'+this.newPartyListFilePath);
-        console.log('newPartys constructor', this.newPartyList);
+        // this.newPartyListFilePath = './data/JSONs/partys/newPartys.json';
+        // this.newPartyList = require('./.'+this.newPartyListFilePath);
+        console.log('newPartys constructor');
     }
 
 
@@ -17,11 +18,13 @@ class newPartys {
 
         console.log('newPArtyObject',newPartyObject);
 
-        this.newPartyList.push(newPartyObject);
+        db.addNewParty(newPartyObject);
 
-        console.log('partyList:',this.newPartyList);
+        // this.newPartyList.push(newPartyObject);
 
-        this.saveToDB();
+        // console.log('partyList:',this.newPartyList);
+
+        // this.saveToDB();
     }
 
     getNewPartys(){
