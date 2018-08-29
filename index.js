@@ -6,6 +6,7 @@ let newPartys = require('./js/newPartys');
 let clients = require('./js/clients');
 let mandateCalculator = require('./js/mandateCalculator');
 let db = require('./js/mongodb/mongodb');
+// db.newParties.getCollection();
 
 let urlencodedParser = bodyParser.urlencoded({ extended: false })
 

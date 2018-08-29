@@ -3,14 +3,14 @@
   "_db": "survey",
   "_collections": {
     "clients": "clients",
-    "partys": "partys",
+    "parties": "parties",
     "general": "general",
-    "newPartys": "newPartys"
+    "newParties": "newParties"
   },
   "_collectionList": [
     "clients",
-    "partys",
+    "parties",
     "general",
-    "newPartys"
+    "newParties"
   ]
 }

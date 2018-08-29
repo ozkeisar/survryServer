@@ -2,33 +2,28 @@ const createNew = require('./createNewObject');
 const db = require('./mongodb/mongodb');
 const fs = require('fs');
 
+let collection;
+
 class newPartys {
 
     constructor(){
-        // this.newPartyListFilePath = './data/JSONs/partys/newPartys.json';
-        // this.newPartyList = require('./.'+this.newPartyListFilePath);
-        console.log('newPartys constructor');
+        console.log('newParties constructor');
+        this.updateCollection();
     }
 
+
+    updateCollection(){
+        collection = db.newParties.getCollection();
+    }
 
     addNewParty(newParty) {
         console.log('name',newParty.name);
 
-        let newPartyObject = createNew.newParty(newParty);
-
-        console.log('newPArtyObject',newPartyObject);
-
-        db.addNewParty(newPartyObject);
-
-        // this.newPartyList.push(newPartyObject);
-
-        // console.log('partyList:',this.newPartyList);
-
-        // this.saveToDB();
+        db.newParties.insertNewParty(createNew.newParty(newParty));
     }
 
-    getNewPartys(){
-        return this.newPartyList;
+    getNewParties(){
+        return collection;
     }
 
     voteParty(body){
