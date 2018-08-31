@@ -2,6 +2,7 @@ let MongoClient = require('mongodb').MongoClient;
 let params = require('./params.json');
 let general = require('./collections/general');
 let newParties = require('./collections/newParties');
+let clients = require('./collections/clients');
 
 class mongodb {
 
@@ -10,6 +11,7 @@ class mongodb {
         this._createCollections();
         this.general = general;
         this.newParties =newParties;
+        this.clients = clients;
     }
 
 

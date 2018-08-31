@@ -2,8 +2,8 @@ const express = require('express')
 const app = express()
 let bodyParser = require('body-parser');
 let partys = require('./js/partys');
-let newPartys = require('./js/newPartys');
-let clients = require('./js/clients');
+let newPartys = require('./js/newPartiesHendler');
+let clients = require('./js/clientsHendler');
 let mandateCalculator = require('./js/mandateCalculator');
 let db = require('./js/mongodb/mongodb');
 // db.newParties.getCollection();
@@ -66,7 +66,7 @@ app.post('/add_new_party', urlencodedParser, function (req, res) {
         name:req.body,
     };
     newPartys.addNewParty(req.body);
-    console.log('kk',req.body);
+    // console.log('kk',req.body);
     // console.log('response: ',response);
     res.end(JSON.stringify(response));
 });
@@ -86,8 +86,8 @@ app.post('/vote', urlencodedParser, function (req, res) {
     };
 
     console.log(response);
-    mandateCalculator.splitMandates();
     res.end(JSON.stringify(response));
 });
 app.listen(3000);
-// require('./js/userInterface');
+
+mandateCalculator.splitMandates();

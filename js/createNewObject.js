@@ -1,58 +1,56 @@
 let fs = require('fs');
 
+let general = require('./mongodb/collections/general');
+
 class createNewObject {
 
     constructor() {
-        this.generalFilePath = './data/JSONs/general.json';
-        this.general = require('./.'+this.generalFilePath);
+
     }
 
     party(name) {
-        this.general.lastId++;
-        this.saveToDB();
         return {
-            name:name,
-            votes:0,
-            mandates:0,
-            id: this.general.lastId
+            name: name,
+            votes: 0,
+            mandates: 0,
+            userThatVoted:[],
+            _id: general._lastId
         }
     }
 
-        newParty(nParty) {
-        console.log('nParty',nParty);
-        this.general.lastId++;
-        this.saveToDB();
+    newParty(nParty) {
+        console.log('nParty', nParty);
+        // this.general.lastId++;
+        // this.saveToDB();
         return {
-            name:nParty.partyName,
-            partyLeader:nParty.partyLeader,
-            partyImageUrl:nParty.imageUrl,
-            candidateList:nParty.candidateList,
+            name: nParty.partyName,
+            partyLeader: nParty.partyLeader,
+            partyImageUrl: nParty.imageUrl,
+            candidateList: nParty.candidateList,
             creatorInfo: {
                 ipv6: nParty.ipv6,
                 imei: nParty.imei
             },
-            userThatVoted:[],
-            votes:1,
-            id: this.general.lastId
+            userThatVoted: [{
+                ipv6: nParty.ipv6,
+                imei: nParty.imei
+            }],
+            votes: 1,
+            _id: general._lastId
         }
     }
 
 
+    client(userInfo, vote) {
 
-    client(ipv6,vote) {
-        this.general.clientsNum++;
-        this.saveToDB();
         return {
-            ipv6: ipv6,
+            userInfo: userInfo,
             location:{},
-            voteTime:new Date(),
-            vote: vote,
-            num: this.general.clientsNum
+            createOn:new Date(),
+            voteHistory:[],
+            currentVote: vote,
+            _id: general._lastId
         }
-    }
-
-    saveToDB(){
-        fs.writeFile(this.generalFilePath,JSON.stringify(this.general));
     }
 
 }

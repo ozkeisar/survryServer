@@ -3,7 +3,7 @@ let params = require('./../params.json');
 
 
 
-class newParties {
+class clients {
 
 
     constructor(){
@@ -17,39 +17,47 @@ class newParties {
 
         var dbo = db.db(params._db);
 
-        let col= await dbo.collection(params._collections["newParties"]).findOne({"_id":/$/});
+        let col= await dbo.collection(params._collections["clients"]).findOne({"_id":/$/});
 
-        console.log("collection1 ",col);
+        console.log("client collection1 ",col);
         db.close();
 
         return col;
     }
 
 
-    async insertNewParty(newParty){
+    async insertNewClient(newClient){
 
         let db = await MongoClient.connect(params._url+params._db);
 
         var dbo = db.db(params._db);
 
-        let col= await dbo.collection(params._collections["newParties"]).insertOne(newParty);
+        let col= await dbo.collection(params._collections["clients"]).insertOne(newClient);
 
-        console.log("new party inserted ",col.ops);
+        console.log("new client inserted ",col.ops);
         db.close();
     }
 
 
-    vote(partyId) {
+    addVoteToHistory(partyInfo){
+
+    }
+
+    vote(client,partyInfo) {
         MongoClient.connect(params._url + params._db, function (err, db) {
             if (err) throw err;
             var dbo = db.db(params._db);
-            dbo.collection(params._collections["newParties"]).update(
-                {_id: partyId},
-                {$inc: {votes: 1}}
+            dbo.collection(params._collections["clients"]).update(
+                {_id: client._id},
+                {currentVote: partyInfo}
             );
         });
     }
 
+    updateVote(){
+
+    }
+
 }
 
-module.exports = new newParties();
+module.exports = new clients();

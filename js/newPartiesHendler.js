@@ -27,23 +27,16 @@ class newPartys {
     }
 
     voteParty(body){
-        let votedParty = (this.newPartyList).find(p => p.id == body.partyId);
+        let votedParty = collection.find(p => p.id == body.partyId);
         console.log(votedParty);
         if(!votedParty.userThatVoted.includes(body.userInfo)){
-            votedParty.votes++;
+            db.newParties.vote(body.partyId)
         }else{
             console.log('already voted');
         }
-
-        console.log(votedParty);
-        this.saveToDB();
+        this.updateCollection();
     }
 
-
-
-    saveToDB(){
-        fs.writeFile(this.newPartyListFilePath,JSON.stringify(this.newPartyList));
-    }
 
 }
 
