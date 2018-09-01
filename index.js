@@ -72,9 +72,27 @@ app.post('/add_new_party', urlencodedParser, function (req, res) {
 });
 
 
+
+app.post('/register', urlencodedParser, function (req, res) {
+
+
+    clients.addClient({ipv6:req.body.ipv6,name:req.body.fullName});
+
+    response = {
+        first_name: req.body.fullName,
+        last_name: req.body.partyId,
+        ipv6: req.body.ipv6 //need to get the ipv6
+
+    };
+
+    console.log(response);
+    res.end(JSON.stringify(response));
+});
+
+
 app.post('/vote', urlencodedParser, function (req, res) {
 
-    partys.unVoteParty(clients.getVotedPartyId(req.body.ipv6));
+    partys.unVoteParty(clients.getUserVotedPartyId(req.body.ipv6));
     clients.updateVote(req.body.ipv6,req.body.partyId);
     partys.voteParty(req.body.partyId);
     // Prepare output in JSON format

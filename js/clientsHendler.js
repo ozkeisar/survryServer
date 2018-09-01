@@ -14,16 +14,24 @@ class clients {
         collection = await db.clients.getCollection()
     }
 
-    addClient(ipv6,vote){
-        db.clients.insertNewClient()
+    async addClient(userInfo){
+        db.clients.insertNewClient(createNew.client(userIfo));
     }
 
-    getVotedPartyId(ipv6){
-
+    async getUserVotedPartyId(userInfo){
+        let client = await collection.filter(c=>{c.userInfo.ipv6 === userInfo.ipv6});
+        return client.currentVote;
     }
 
     updateVote(userInfo,newVote){
+        //dec old party
+        // partys.unVoteParty(this.getUserVotedPartyId(req.body.ipv6));
 
+        //inc new one
+        // partys.voteParty(req.body.partyId);
+
+        //update the currentVote fo the client
+        // db.clients.updateVote();
     }
 
 }
