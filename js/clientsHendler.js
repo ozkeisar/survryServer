@@ -34,6 +34,9 @@ class clients {
         // db.clients.updateVote();
     }
 
+    getClientNumber(){
+        return collection.length;
+    }
 }
 
 module.exports = new clients();

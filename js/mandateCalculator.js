@@ -1,4 +1,4 @@
-let partys = require('./partys');
+let partys = require('./partiesHendler');
 const fs = require('fs');
 
 class mandateCalculator {

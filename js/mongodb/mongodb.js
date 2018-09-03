@@ -3,6 +3,7 @@ let params = require('./params.json');
 let general = require('./collections/general');
 let newParties = require('./collections/newParties');
 let clients = require('./collections/clients');
+let parties = require('./collections/parties');
 
 class mongodb {
 
@@ -12,6 +13,7 @@ class mongodb {
         this.general = general;
         this.newParties =newParties;
         this.clients = clients;
+        this.parties = parties;
     }
 
 
