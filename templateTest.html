@@ -1,8 +1,9 @@
 <html>
 <body>
 
-<!--<form action = "http://127.0.0.1:3000/add_party" method = "POST">-->
+<!--<form action = "http://127.0.0.1:3000/add_party" accept-charset="UTF-8" method = "POST">-->
     <!--party name: <input type = "text" name = "name"> <br>-->
+    <!--party candidate: <input type = "text" name = "candidate"> <br>-->
     <!--<input type = "submit" value = "Submit">-->
 <!--</form>-->
 
@@ -13,10 +14,17 @@
 <!--</form>-->
 
 
-<form  action = "http://127.0.0.1:3000/add_new_party" accept-charset="UTF-8" method = "POST">
-    device ipv6: <input type = "text" name = "ipv6"> <br>
-    party name: <input type = "text" name = "partyName"><br>
-    party leader: <input type = "text" name = "partyLeader"><br>
+<!--<form  action = "http://127.0.0.1:3000/add_new_party" accept-charset="UTF-8" method = "POST">-->
+    <!--device ipv6: <input type = "text" name = "ipv6"> <br>-->
+    <!--party name: <input type = "text" name = "partyName"><br>-->
+    <!--party leader: <input type = "text" name = "partyLeader"><br>-->
+    <!--<input type = "submit" value = "Submit">-->
+<!--</form>-->
+
+
+<form  action = "http://127.0.0.1:3000/vote_for_new_party" accept-charset="UTF-8" method = "POST">
+    userInfo: <input type = "text" name = "userInfo"> <br>
+    party id: <input type = "text" name = "partyId"><br>
     <input type = "submit" value = "Submit">
 </form>
 

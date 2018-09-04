@@ -17,9 +17,9 @@ class parties {
 
         var dbo = db.db(params._db);
 
-        let col= await dbo.collection(params._collections["parties"]).findOne({"_id":/$/});
+        let col= await dbo.collection(params._collections["parties"]).find({}).toArray();
 
-        console.log("collection1 ",col);
+        // console.log("collection1 ",col);
         db.close();
 
         return col;

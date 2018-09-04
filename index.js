@@ -1,10 +1,10 @@
 const express = require('express')
 const app = express()
 let bodyParser = require('body-parser');
-let partys = require('./js/partiesHendler');
-let newPartys = require('./js/newPartiesHendler');
+let parties = require('./js/partiesHendler');
+let newParties = require('./js/newPartiesHendler');
 let clients = require('./js/clientsHendler');
-let mandateCalculator = require('./js/mandateCalculator');
+// let mandateCalculator = require('./js/mandateCalculator');
 let db = require('./js/mongodb/mongodb');
 // db.newParties.getCollection();
 
@@ -21,41 +21,35 @@ app.use((request, response, next) => {
     next()
 })
 
-// app.get('/', (request, response) => {
-//
-//     response.json({
-//         partys:partys.getPartys()
-//     })
-// })
 
-app.get('/parties', (request, response) => {
+app.get('/parties', async (request, response) => {
     response.json({
-        partys:partys.getPartys()
+        parties:await parties.getParties()
     })
 });
-app.get('/newParties', (request, response) => {
+app.get('/newParties', async(request, response) => {
     response.json({
-        newPartys:newPartys.getNewPartys()
+        newParties:await newParties.getNewParties()
     })
 });
 
-//
-// app.post('/add_party', urlencodedParser, function (req, res) {
-//     // Prepare output in JSON format
-//     response = {
-//         name:req.body.name,
-//     };
-//     partys.addParty(req.body);
-//     // console.log('response: ',response);
-//     res.end(JSON.stringify(response));
-// });
+
+app.post('/add_party', urlencodedParser, function (req, res) {
+    // Prepare output in JSON format
+    response = {
+        name:req.body.name,
+    };
+    parties.addParty(req.body);
+    // console.log('body: ',req.body);
+    res.end(JSON.stringify(response));
+});
 
 app.post('/vote_for_new_party', urlencodedParser, function (req, res) {
     // Prepare output in JSON format
     response = {
         name:req.body.name,
     };
-    newPartys.voteParty(req.body);
+    newParties.voteParty(req.body);
     // console.log('response: ',response);
     res.end(JSON.stringify(response));
 });
@@ -65,7 +59,7 @@ app.post('/add_new_party', urlencodedParser, function (req, res) {
     response = {
         name:req.body,
     };
-    newPartys.addNewParty(req.body);
+    // newPartys.addNewParty(req.body);
     // console.log('kk',req.body);
     // console.log('response: ',response);
     res.end(JSON.stringify(response));
@@ -92,9 +86,9 @@ app.post('/register', urlencodedParser, function (req, res) {
 
 app.post('/vote', urlencodedParser, function (req, res) {
 
-    partys.unVoteParty(clients.getUserVotedPartyId(req.body.ipv6));
-    clients.updateVote(req.body.ipv6,req.body.partyId);
-    partys.voteParty(req.body.partyId);
+    // partys.unVoteParty(clients.getUserVotedPartyId(req.body.ipv6));
+    // clients.updateVote(req.body.ipv6,req.body.partyId);
+    // partys.voteParty(req.body.partyId);
     // Prepare output in JSON format
     response = {
         first_name: req.body.partyName,
@@ -108,4 +102,4 @@ app.post('/vote', urlencodedParser, function (req, res) {
 });
 app.listen(3000);
 
-mandateCalculator.splitMandates();
+// mandateCalculator.splitMandates();

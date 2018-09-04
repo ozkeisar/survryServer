@@ -7,7 +7,10 @@ let collection = [];
 class parties {
 
     constructor(){
-        this.updateCollection();
+        db.parties.getCollection().then((col)=>{
+            // console.log('parties coll',col);
+            collection = col;
+        });
     }
 
 
@@ -15,10 +18,12 @@ class parties {
         collection = await db.parties.getCollection();
     }
 
-    addParty(newParty) {
-        console.log('name',newParty.name);
+    async addParty(newParty) {
+        // console.log('name',newParty.name);
 
-        let newPartyObject = createNew.party(newParty.name);
+        let newPartyObject = await createNew.party(newParty.name,newParty.candidate);
+
+        // console.log(newPartyObject);
 
         db.parties.insertParty(newPartyObject).then(()=>{
             this.updateCollection();
@@ -42,7 +47,7 @@ class parties {
     unVote(partyId){
         if(partyId) {
 
-            let votedParty = collection.find(p => p.id == partyId);
+            let votedParty = collection.find(p => p._id == partyId);
             console.log(votedParty);
             if(votedParty){
                 db.parties.unVote(partyId);
@@ -53,4 +58,4 @@ class parties {
 
 }
 
-module.exports = new Partys();
+module.exports = new parties();

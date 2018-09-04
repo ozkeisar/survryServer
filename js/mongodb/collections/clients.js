@@ -19,7 +19,7 @@ class clients {
 
         let col= await dbo.collection(params._collections["clients"]).findOne({"_id":/$/});
 
-        console.log("client collection1 ",col);
+        // console.log("client collection1 ",col);
         db.close();
 
         return col;

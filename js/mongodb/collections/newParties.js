@@ -17,9 +17,9 @@ class newParties {
 
         var dbo = db.db(params._db);
 
-        let col= await dbo.collection(params._collections["newParties"]).findOne({"_id":/$/});
+        let col= await dbo.collection(params._collections["newParties"]).find({}).toArray();
 
-        console.log("collection1 ",col);
+        // console.log("collection1 ",col);
         db.close();
 
         return col;
@@ -39,14 +39,18 @@ class newParties {
     }
 
 
-    vote(partyId) {
+    vote(partyId,userInfo) {
+        console.log('vote',partyId,userInfo);
         MongoClient.connect(params._url + params._db, function (err, db) {
             if (err) throw err;
             var dbo = db.db(params._db);
-            dbo.collection(params._collections["newParties"]).update(
-                {_id: partyId},
-                {$inc: {votes: 1}}
-            );
+            dbo.collection(params._collections["newParties"]).updateOne(
+                {_id: parseInt(partyId)},
+                {$inc: {votes: 1},$push: {userThatVoted: userInfo}}
+            ,(err, res)=>{
+                    if (err) throw err;
+                    db.close();
+                });
         });
     }
 

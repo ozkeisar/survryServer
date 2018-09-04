@@ -8,12 +8,13 @@ class createNewObject {
 
     }
 
-    party(name) {
+    party(name,candidate) {
         return {
             name: name,
             votes: 0,
             mandates: 0,
             userThatVoted:[],
+            candidate:candidate,
             _id: general._lastId
         }
     }
