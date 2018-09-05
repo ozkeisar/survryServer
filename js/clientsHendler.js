@@ -7,7 +7,9 @@ let collection;
 class clients {
 
     constructor(){
-        this.updateCollection();
+        db.clients.getCollection().then(col=>{
+            collection = col;
+        })
     }
 
     async updateCollection(){
@@ -23,15 +25,20 @@ class clients {
         return client.currentVote;
     }
 
-    updateVote(userInfo,newVote){
+    vote(userInfo,newVote){
+        let client = collection.find(c=>c.userInfo == userInfo);
+
+
         //dec old party
-        // partys.unVoteParty(this.getUserVotedPartyId(req.body.ipv6));
+        db.parties.unVote(client.currentVote);
 
         //inc new one
-        // partys.voteParty(req.body.partyId);
+        db.parties.vote(newVote);
 
         //update the currentVote fo the client
-        // db.clients.updateVote();
+        db.clients.updateCurrentVote(newVote);
+
+        //add vote to history
     }
 
     getClientNumber(){

@@ -53,17 +53,17 @@ app.post('/vote_for_new_party', urlencodedParser, function (req, res) {
     // console.log('response: ',response);
     res.end(JSON.stringify(response));
 });
-
-app.post('/add_new_party', urlencodedParser, function (req, res) {
-    // Prepare output in JSON format
-    response = {
-        name:req.body,
-    };
-    // newPartys.addNewParty(req.body);
-    // console.log('kk',req.body);
-    // console.log('response: ',response);
-    res.end(JSON.stringify(response));
-});
+//
+// app.post('/add_new_party', urlencodedParser, function (req, res) {
+//     // Prepare output in JSON format
+//     response = {
+//         name:req.body,
+//     };
+//     // newPartys.addNewParty(req.body);
+//     // console.log('kk',req.body);
+//     // console.log('response: ',response);
+//     res.end(JSON.stringify(response));
+// });
 
 
 
@@ -88,7 +88,8 @@ app.post('/vote', urlencodedParser, function (req, res) {
 
     // partys.unVoteParty(clients.getUserVotedPartyId(req.body.ipv6));
     // clients.updateVote(req.body.ipv6,req.body.partyId);
-    // partys.voteParty(req.body.partyId);
+    // parties.vote(req.body.partyId);
+    clients.vote(req.body.userInfo,req.body.partyId);
     // Prepare output in JSON format
     response = {
         first_name: req.body.partyName,

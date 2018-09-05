@@ -16,9 +16,9 @@ class newParties {
     }
 
 
-    updateCollection(){
+    async updateCollection(){
         // console.log('ll',db.newParties.getCollection())
-        collection = db.newParties.getCollection();
+        collection = await db.newParties.getCollection();
     }
 
     addNewParty(newParty) {
