@@ -67,20 +67,19 @@ app.post('/vote_for_new_party', urlencodedParser, function (req, res) {
 
 
 
-app.post('/register', urlencodedParser, function (req, res) {
+app.post('/register', urlencodedParser, async function (req, res) {
 
-
-    clients.addClient({ipv6:req.body.ipv6,name:req.body.fullName});
-
+    let _id = await clients.addClient(req.body);
     response = {
-        first_name: req.body.fullName,
-        last_name: req.body.partyId,
-        ipv6: req.body.ipv6 //need to get the ipv6
-
+        body:req.body,
+       _id:_id
     };
 
-    console.log(response);
+    console.log('res',response);
     res.end(JSON.stringify(response));
+
+
+
 });
 
 

@@ -42,14 +42,14 @@ class createNewObject {
     }
 
 
-    client(userInfo, vote) {
+    client(userInfo, location) {
 
         return {
             userInfo: userInfo,
-            location:{},
+            location:location,
             createOn:new Date(),
             voteHistory:[],
-            currentVote: vote,
+            currentVote: undefined,
             _id: general._lastId
         }
     }

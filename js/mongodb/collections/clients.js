@@ -39,11 +39,18 @@ class clients {
     }
 
 
-    addVoteToHistory(partyInfo){
-
+    addVoteToHistory(client,partyInfo){
+        MongoClient.connect(params._url + params._db, function (err, db) {
+            if (err) throw err;
+            var dbo = db.db(params._db);
+            dbo.collection(params._collections["clients"]).update(
+                {_id: client._id},
+                {$push: {voteHistory: partyInfo}}
+            );
+        });
     }
 
-    vote(client,partyInfo) {
+    updateCurrentVote(client,partyInfo) {
         MongoClient.connect(params._url + params._db, function (err, db) {
             if (err) throw err;
             var dbo = db.db(params._db);
@@ -54,9 +61,7 @@ class clients {
         });
     }
 
-    updateCurrentVote(){
 
-    }
 
 }
 

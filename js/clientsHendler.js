@@ -16,8 +16,10 @@ class clients {
         collection = await db.clients.getCollection()
     }
 
-    async addClient(userInfo){
-        db.clients.insertNewClient(createNew.client(userIfo));
+    async addClient(user){
+        let newUser = await createNew.client(user.userInfo,user.location);
+        db.clients.insertNewClient(newUser);
+        return newUser._id;
     }
 
     async getUserVotedPartyId(userInfo){
@@ -36,9 +38,11 @@ class clients {
         db.parties.vote(newVote);
 
         //update the currentVote fo the client
-        db.clients.updateCurrentVote(newVote);
+        db.clients.updateCurrentVote(client,newVote);
 
         //add vote to history
+        db.clients.addVoteToHistory(client,newVote);
+
     }
 
     getClientNumber(){
