@@ -35,12 +35,13 @@ class parties {
         return collection;
     }
 
-    vote(partyId){
+    vote(partyId,userInfo){
         let votedParty = collection.find(p => p._id == partyId);
         if(votedParty){
-            db.parties.vote(partyId);
+            db.parties.vote(partyId,userInfo);
         }
-        console.log(votedParty);
+
+        // console.log(votedParty);
         this.updateCollection();
     }
 

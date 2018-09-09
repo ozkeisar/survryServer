@@ -85,15 +85,13 @@ app.post('/register', urlencodedParser, async function (req, res) {
 
 app.post('/vote', urlencodedParser, function (req, res) {
 
-    // partys.unVoteParty(clients.getUserVotedPartyId(req.body.ipv6));
-    // clients.updateVote(req.body.ipv6,req.body.partyId);
-    // parties.vote(req.body.partyId);
+
     clients.vote(req.body.userInfo,req.body.partyId);
     // Prepare output in JSON format
     response = {
         first_name: req.body.partyName,
         last_name: req.body.partyId,
-        ipv6: req.body.ipv6 //need to get the ipv6
+        ipv6: req.body.userInfo //need to get the ipv6
 
     };
 

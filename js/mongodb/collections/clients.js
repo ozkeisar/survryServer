@@ -17,7 +17,7 @@ class clients {
 
         var dbo = db.db(params._db);
 
-        let col= await dbo.collection(params._collections["clients"]).findOne({"_id":/$/});
+        let col= await dbo.collection(params._collections["clients"]).find({}).toArray();
 
         // console.log("client collection1 ",col);
         db.close();
@@ -44,8 +44,8 @@ class clients {
             if (err) throw err;
             var dbo = db.db(params._db);
             dbo.collection(params._collections["clients"]).update(
-                {_id: client._id},
-                {$push: {voteHistory: partyInfo}}
+                {_id:parseInt(client._id)},
+                {$push: {voteHistory: {partyId:partyInfo,time:new Date()}}}
             );
         });
     }
@@ -54,9 +54,9 @@ class clients {
         MongoClient.connect(params._url + params._db, function (err, db) {
             if (err) throw err;
             var dbo = db.db(params._db);
-            dbo.collection(params._collections["clients"]).update(
-                {_id: client._id},
-                {currentVote: partyInfo}
+            dbo.collection(params._collections["clients"]).updateOne(
+                {_id: parseInt(client._id)},
+                {$set:{currentVote: partyInfo}}
             );
         });
     }
