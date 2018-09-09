@@ -50,6 +50,17 @@ class parties {
         });
     }
 
+    pullUserInfo(partyId,userInfo){
+        MongoClient.connect(params._url + params._db, function (err, db) {
+            if (err) throw err;
+            var dbo = db.db(params._db);
+            dbo.collection(params._collections["parties"]).updateOne(
+                {_id: parseInt(partyId)},
+                {$pull:{userThatVoted:userInfo}}
+            );
+        });
+    }
+
     unVote(partyId){
         MongoClient.connect(params._url + params._db, function (err, db) {
             if (err) throw err;

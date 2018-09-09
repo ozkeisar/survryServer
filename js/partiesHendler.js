@@ -40,7 +40,7 @@ class parties {
         if(votedParty){
             db.parties.vote(partyId,userInfo);
         }
-
+        db.parties.pullUserInfo(partyId,userInfo);
         // console.log(votedParty);
         this.updateCollection();
     }
