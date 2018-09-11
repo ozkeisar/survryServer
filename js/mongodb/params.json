@@ -4,13 +4,11 @@
   "_collections": {
     "clients": "clients",
     "parties": "parties",
-    "general": "general",
-    "newParties": "newParties"
+    "general": "general"
   },
   "_collectionList": [
     "clients",
     "parties",
-    "general",
-    "newParties"
+    "general"
   ]
 }

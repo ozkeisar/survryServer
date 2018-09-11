@@ -8,45 +8,26 @@ class createNewObject {
 
     }
 
-    party(name,candidate) {
+    party(party) {
         return {
-            name: name,
+            name: party.name,
+            partyLeader:party.partyLeader,
             votes: 0,
             mandates: 0,
             userThatVoted:[],
-            candidate:candidate,
-            _id: general._lastId
-        }
-    }
-
-    newParty(nParty) {
-        console.log('nParty', nParty);
-        // this.general.lastId++;
-        // this.saveToDB();
-        return {
-            name: nParty.partyName,
-            partyLeader: nParty.partyLeader,
-            partyImageUrl: nParty.imageUrl,
-            candidateList: nParty.candidateList,
-            creatorInfo: {
-                ipv6: nParty.ipv6,
-                imei: nParty.imei
-            },
-            userThatVoted: [{
-                ipv6: nParty.ipv6,
-                imei: nParty.imei
-            }],
-            votes: 1,
+            partyImageUrl: party.imageUrl,
+            candidate:party.candidate,
             _id: general._lastId
         }
     }
 
 
-    client(userInfo, location) {
+    client(userInfo, location,phoneNumber) {
 
         return {
             userInfo: userInfo,
             location:location,
+            phoneNumber:phoneNumber,
             createOn:new Date(),
             voteHistory:[],
             currentVote: undefined,

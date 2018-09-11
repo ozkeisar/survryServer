@@ -18,7 +18,7 @@ class clients {
     }
 
     async addClient(user){
-        let newUser = await createNew.client(user.userInfo,user.location);
+        let newUser = await createNew.client(user.userInfo,user.location,user.phoneNumber);
         db.clients.insertNewClient(newUser);
         return newUser._id;
     }

@@ -21,9 +21,9 @@ class parties {
     async addParty(newParty) {
         // console.log('name',newParty.name);
 
-        let newPartyObject = await createNew.party(newParty.name,newParty.candidate);
+        let newPartyObject = await createNew.party(newParty);
 
-        // console.log(newPartyObject);
+        console.log(newPartyObject);
 
         db.parties.insertParty(newPartyObject).then(()=>{
             this.updateCollection();
