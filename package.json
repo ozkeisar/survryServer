@@ -10,9 +10,10 @@
     "url": ""
   },
   "dependencies": {
-    "npm": "^6.1.0"
+    "express": "^4.16.3",
+    "mongodb": "^3.1.6"
   },
   "scripts": {},
   "keywords": [],
-  "aouter":"oz"
+  "aouter": "oz"
 }
