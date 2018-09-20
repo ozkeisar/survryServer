@@ -21,6 +21,7 @@ app.use((request, response, next) => {
 
 
 app.get('/parties', async (request, response) => {
+    console.log(await parties.getParties());
     response.json({
         parties:await parties.getParties()
     })

@@ -20,6 +20,7 @@ class clients {
     async addClient(user){
         let newUser = await createNew.client(user.userInfo,user.location,user.phoneNumber);
         db.clients.insertNewClient(newUser);
+        this.updateCollection();
         return newUser._id;
     }
 
