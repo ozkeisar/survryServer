@@ -1,37 +1,41 @@
-const express = require('express')
-const app = express()
-let bodyParser = require('body-parser');
-let parties = require('./js/partiesHendler');
-let clients = require('./js/clientsHendler');
+const express = require('express');
+const bodyParser = require('body-parser');
+const parties = require('./js/partiesHendler');
+const clients = require('./js/clientsHendler');
+const path = require('path');
 // let mandateCalculator = require('./js/mandateCalculator');
 let db = require('./js/mongodb/mongodb');
+const urlencodedParser = bodyParser.urlencoded({extended: false});
 
-let urlencodedParser = bodyParser.urlencoded({ extended: false });
-
-
-app.use((request, response, next) => {
-    console.log(request.headers)
-    next()
-})
+const app = express();
 
 app.use((request, response, next) => {
-    request.chance = Math.random()
-    next()
-})
+    console.log(request.headers);
+    next();
+});
 
+app.use((request, response, next) => {
+    request.chance = Math.random();
+    next();
+});
+
+app.get("/menage", (request, response) => {
+    response.sendFile(path.join(__dirname + '/templateTest.html'));
+});
 
 app.get('/parties', async (request, response) => {
     console.log(await parties.getParties());
     response.json({
-        parties:await parties.getParties()
+        parties: await parties.getParties()
     })
 });
 
+app.post(urlencodedParser);
 
-app.post('/add_party', urlencodedParser, function (req, res) {
+app.post('/add_party', function (req, res) {
     // Prepare output in JSON format
     response = {
-        body:req.body,
+        body: req.body,
     };
     parties.addParty(req.body);
     // console.log('body: ',req.body);
@@ -39,27 +43,25 @@ app.post('/add_party', urlencodedParser, function (req, res) {
 });
 
 
-
-app.post('/register', urlencodedParser, async function (req, res) {
+app.post('/register', async function (req, res) {
 
     let _id = await clients.addClient(req.body);
     response = {
-        body:req.body,
-       _id:_id
+        body: req.body,
+        _id: _id
     };
 
-    console.log('res',response);
+    console.log('res', response);
     res.end(JSON.stringify(response));
-
 
 
 });
 
 
-app.post('/vote', urlencodedParser, function (req, res) {
+app.post('/vote', function (req, res) {
 
 
-    clients.vote(req.body.userInfo,req.body.partyId);
+    clients.vote(req.body.userInfo, req.body.partyId);
     // Prepare output in JSON format
     response = {
         first_name: req.body.partyName,
