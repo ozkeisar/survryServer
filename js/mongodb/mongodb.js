@@ -6,7 +6,7 @@ let parties = require('./collections/parties');
 
 class mongodb {
 
-    constructor(){
+    constructor() {
         this._createdb();
         this._createCollections();
         this.general = general;
@@ -17,30 +17,28 @@ class mongodb {
 
     _createdb() {
 
-        MongoClient.connect(params._url+params._db, function(err, db) {
+        MongoClient.connect(params._url + params._db, function (err, db) {
             if (err) throw err;
             console.log("Database created!");
             db.close();
         });
     }
-    _createCollections(){
-        MongoClient.connect(params._url+params._db, function(err, db) {
+
+    _createCollections() {
+        MongoClient.connect(params._url + params._db, function (err, db) {
             if (err) throw err;
 
-            params._collectionList.map((collection,i)=>{
-                var dbo = db.db(params._db);
-                dbo.createCollection(collection, function (err, res) {
+            params._collectionList.map(collection => {
+                const dbo = db.db(params._db);
+                dbo.createCollection(collection, function (err) {
                     if (err) throw err;
-                    console.log(collection+" Collection created!");
-                    if(i === params._collections.length-1){
-                        db.close();
-                    }
+                    console.log(collection + " Collection created!");
                 });
-            })
+            });
 
-        })
+            db.close();
+        });
     }
-
 
 
     // async getId(){
@@ -70,19 +68,18 @@ class mongodb {
     //     });
     // }
 
-    addNewParty(newParty){
-        console.log('lll',params._collections["newParties"]);
-        MongoClient.connect(params._url+params._db, function(err, db) {
+    addNewParty(newParty) {
+        console.log('lll', params._collections["newParties"]);
+        MongoClient.connect(params._url + params._db, function (err, db) {
             if (err) throw err;
-            var dbo = db.db(params._db);
-            dbo.collection(params._collections["newParties"]).insertOne(newParty, function(err, res) {
+            const dbo = db.db(params._db);
+            dbo.collection(params._collections["newParties"]).insertOne(newParty, function (err) {
                 if (err) throw err;
                 console.log("1 document inserted");
                 db.close();
             });
         });
     }
-
 
 
 }
